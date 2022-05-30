@@ -5,7 +5,7 @@ import moment from 'moment';
 import { omit } from 'lodash'
 import { Link } from 'react-router-dom';
 
-import M_CONTROLLER from '../Controllers/Stock.Controller';
+import M_CONTROLLER from '../Controllers/DStock.Controller';
 import CONFIG from '../Controllers/Config.Controller';
 
 class DeleteDStock extends React.Component {
@@ -49,7 +49,7 @@ class DeleteDStock extends React.Component {
                     <div className="row mt-1 pb-3" >
                     <div className="col-md-12 mt-2" >
                     <h6 style={{fontSize : '0.9rem'}}
-                        className="text-header text-danger mb-0 font-weight-bold line-hight-1">Are you sure you want to delete this machine ?<br></br>
+                        className="text-header text-danger mb-0 font-weight-bold line-hight-1">Are you sure you want to delete this damaged stock ?<br></br>
                     <span className="text-muted small">This process can't be undone, All the relevant details will be permanently deleted !</span></h6>
                     </div>
                     <div className="col-md-12 mt-3" >
@@ -78,7 +78,7 @@ class DeleteDStock extends React.Component {
                     <div className="col-md-12 mt-1 mb-1" >
                     <hr className="my-2"></hr>
                             <button onClick={this.onDelete} className="btn-danger mt-2 btn btn-sm px-3 py-1">Delete</button>
-                            <Link to="/Stock/list"><button id="cancelBtn" className="btn-light mt-2 btn btn-sm px-3 py-1 border mx-2">Cancel</button></Link>
+                            <Link to="/DStock/StockExpense"><button id="cancelBtn" className="btn-light mt-2 btn btn-sm px-3 py-1 border mx-2">Cancel</button></Link>
                     </div>
                 </div>
                 
@@ -99,7 +99,7 @@ class DeleteDStock extends React.Component {
             id: this.state.id,
             name: this.state.name,
         }
-        const result = await M_CONTROLLER.deleteStock(data);
+        const result = await M_CONTROLLER.deleteDStock(data);
         if(result == 200){
             CONFIG.showAlert("Successfully Deleted");
             document.getElementById("cancelBtn").click();

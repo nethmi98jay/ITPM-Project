@@ -32,7 +32,6 @@ class SupplierList extends React.Component {
     doc.save("supplier.pdf")
     
   }
-
   Loading = () => (
     <tr>
         <td className="text-center" colSpan={6}>
@@ -53,16 +52,18 @@ class SupplierList extends React.Component {
         </td>
     </tr>
     );
-  search = (e) => {
-    this.setState({
-        search : e.target.value
-    })
-}
+
+    search = (e) => {
+        this.setState({
+            search : e.target.value
+        })
+    }
 
 
 
   render(){
-      const {supplierList} = this.state;
+      const {Loading,supplierList} = this.state;
+      console.log("supplierList: ", supplierList);
   return (
     <div className="app" >
     <Sidebar activemenu={'SUPPLIER'} submenu={'SUPPLIER_LIST'} />
@@ -76,7 +77,7 @@ class SupplierList extends React.Component {
                 <div className="col-12 shadow-sm rounded bg-white mt-3" >
                 <input type='text'
                     onChange={this.search}
-                    placeholder="Search" 
+                    placeholder="Search Anything..."
                 
                 className="col-12 shadow-sm rounded bg-white mt-3" />
                 <table class="table borderless customtable" id="supplier-table">
@@ -94,7 +95,9 @@ class SupplierList extends React.Component {
                         </tr>
                     </thead>
                     <tbody >
-                        {supplierList && supplierList.map((value , i) => this.renderTable(value , i))}
+                    { !Loading && supplierList.length == 0 && <this.NoResult/> } 
+
+                    { !Loading && supplierList.length > 0 && <this.renderTable/> }
                       
                     </tbody>
                 </table>
