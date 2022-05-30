@@ -33,11 +33,23 @@ connection.once('open', () => {
  
 const employeeRouter = require("./routes/Employee.route.js");
 
+const empattendanceRouter = require("./routes/EmpAttendance.route.js");
+
+const basicinformationRouter = require("./routes/BasicInformation.route.js");
+
+const empsalaryRouter = require("./routes/EmpSalary.route.js");
+
 const machineRouter = require("./routes/Machine.route.js");
 
 const supplierRouter = require("./routes/Supplier.route.js");
 
 const paymentRouter = require("./routes/Payment.route.js");
+
+const expenseRouter = require("./routes/Expense.route");
+
+const stockRouter = require("./routes/Stock.route.js");
+
+const dstockRouter = require("./routes/DStock.route.js");
 
 
 //http://localhost:8070 -backend url
@@ -52,11 +64,20 @@ app.use("/Supplier", supplierRouter);
 
 app.use("/Payment", paymentRouter);
 
+app.use("/Expense", expenseRouter);
+
+app.use("/EmpAttendance", empattendanceRouter);
+
+app.use("/BasicInformation", basicinformationRouter);
+
+app.use("/EmpSalary", empsalaryRouter);
+
+app.use("/Stock",stockRouter );
+
+app.use("/DStock",dstockRouter );
 
 
 
- const stockRouter = require("./routes/Stock.route.js");
- app.use("/Stock",stockRouter );
 
 
 

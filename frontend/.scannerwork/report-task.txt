@@ -1,0 +1,6 @@
+projectKey=Garment-Factory-Management
+serverUrl=http://localhost:9000
+serverVersion=9.4.0.54424
+dashboardUrl=http://localhost:9000/dashboard?id=Garment-Factory-Management
+ceTaskId=AYDq73LBRkHBTQbizhOh
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYDq73LBRkHBTQbizhOh

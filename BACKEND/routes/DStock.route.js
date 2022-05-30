@@ -1,48 +1,47 @@
 const router = require("express").Router();
 const res = require("express/lib/response");
-let Stock = require("../models/Stock.model");
+let DStock = require("../models/DStock.model");
 
-//Insert stock details
+//Insert Damaged stock details
 
-http://localhost:8070/Stock/add
+http://localhost:8070/DStock/add
 
 router.route("/add").post((req, res)=>{
     //body
-    const itemCode = req.body.itemCode;
-    const itemName= req.body.itemName;
-    const garmentQuantity = req.body.garmentQuantity;
-    const month = req.body.month;
-    const priceEach = req.body. priceEach;
-    const garmentStatus = req.body.garmentStatus; 
+    const ItemCode = req.body.ItemCode;
+    const Description = req.body.Description ;
+    const Price = req.body.Price;
+    const Month = req.body.Month;
+    
     
 
      //create a object of model
-    const newStock = new Stock({
-        itemCode,
-        itemName,
-        garmentQuantity,
-        month,
-        priceEach,
-        garmentStatus
+    const newDStock = new DStock({
+        ItemCode,
+        Description,
+        Price,
+        Month
+        
     })
 
+
     //pass the object to mongodb
-    newStock.save().then(()=>{
-        res.json("Stock Added")
+    newDStock.save().then(()=>{
+        res.json("Damaged Stock Added")
     }).catch((err)=>{
         console.log(err);
     })
 
 })
 
-//display Stock details
+//display Damaged Stock details
 
-http://localhost:8070/Stock
+http://localhost:8070/DStock
 
 router.route("/").get((req, res)=>{
     //body
-    Stock.find().then((stocks)=>{
-        res.json(stocks)
+    DStock.find().then((dstocks)=>{
+        res.json(dstocks)
     }).catch((err)=> {
         console.log(err)
     })
@@ -50,7 +49,7 @@ router.route("/").get((req, res)=>{
 })
 
 //Update stock details
-http://localhost:8070/Stock/update
+http://localhost:8070/DStock/update
 router.route("/update").post(async(req, res)=>{
     if (req.body.id == null || req.body.id == undefined) {
         res.status(400).send({
@@ -59,33 +58,28 @@ router.route("/update").post(async(req, res)=>{
         return;
     }
 
-    const {itemCode, itemName, garmentQuantity, month, priceEach, garmentStatus } = req.body;
+    const {ItemCode, Description, Price, Month } = req.body;
     console.log(req.body);
     
-     Stock.findOne({_id : req.body.id }, (err, foundBul) => {
+     DStock.findOne({_id : req.body.id }, (err, foundBul) => {
         if(err) return res.status(401).send(err);
 
         if(!foundBul) return res.status(404).send("Building not found");
 
-        if(itemCode){
-            foundBul.itemCode = req.body.itemCode;
+        if(ItemCode){
+            foundBul.ItemCode = req.body.ItemCode;
         }
-        if(itemName){
-            foundBul.itemName = req.body.itemName;
+        if(Description){
+            foundBul.Description = req.body.Description;
         }
-        if(garmentQuantity){
-            foundBul.garmentQuantity = req.body.garmentQuantity;
+        if(Price){
+            foundBul.Price = req.body.Price;
         }
-        if(month){
-            foundBul.month = req.body.month;
+        
+        if(Month){
+            foundBul.Month = req.body.Month;
         }
-        if(priceEach){
-            foundBul.priceEach = req.body.priceEach;
-        }
-        if(garmentStatus){
-            foundBul.garmentStatus = req.body.garmentStatus;
-        }
-
+        
         foundBul.save((err, savedBul) => {
             if(err) return res.status(401).send(err);
 
@@ -97,8 +91,8 @@ router.route("/update").post(async(req, res)=>{
 })
 
 
-//delete stock
-http://localhost:8070/Stock
+//delete damage stock
+http://localhost:8070/DStock
  router.route("/delete/:id").delete(async(req, res)=> {
     console.log(req.params.id);
     
@@ -109,7 +103,7 @@ http://localhost:8070/Stock
         return;
     }
     
-    Stock.findOneAndDelete({ _id: req.params.id })
+    DStock.findOneAndDelete({ _id: req.params.id })
     .then( result => {
 
         if (!result) {
@@ -132,7 +126,7 @@ http://localhost:8070/Stock
 router.route("/getOne/:id").get(async(req, res)=> {
    
     try {
-        const build = await Stock.findOne({ _id: req.params.id });
+        const build = await DStock.findOne({ _id: req.params.id });
         return res.status(200).send({
             data: build
         })
