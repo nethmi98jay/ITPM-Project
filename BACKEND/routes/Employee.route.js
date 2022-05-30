@@ -96,7 +96,7 @@ router.route("/get/:id").get(async(req, res)=> {
     const emp = await Employee.findById(empId)
     .then((employees)=> {
         res.status(200).send({status: "Employee fetched", employees})
-    }).catch(()=> {
+    }).catch((err)=> {
         console.log(eer.message);
         res.status(500).send({status: "Error with get employee", error: err(message)})
     })

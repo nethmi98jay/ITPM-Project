@@ -1,39 +1,24 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
-
-const dstockSchema = new Schema({
-
-    ItemCode : {
-
+const  basicinfoSchema = new Schema({
+    empType : {
         type : String,
-
         required : true
-
     },
-
-    Description : {
-
+    basicSalary : {
         type : String,
-
         required : true
-
     },
-
-    Price :{
-
+    workedHrs :{
         type : String,
-
         required : true
-
     },
-
-    Month :{
-
+    otRate :{
         type : String,
-
-        required : true    }
+        required : true
+    }
+    
 })
-const DStock = mongoose.model("DStock", dstockSchema);
 
-module.exports = DStock;
+const BasicInfotmation = mongoose.model("BasicInfotmation", basicinfoSchema);
+module.exports = BasicInfotmation;
